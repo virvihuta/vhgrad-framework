@@ -1,5 +1,3 @@
----
-
 # MicrogradX
 
 **MicrogradX** is a lightweight deep learning framework in Python, 
@@ -8,8 +6,6 @@ It’s built entirely from scratch to demonstrate how neural networks and
 automatic differentiation work under the hood.
 
 This project is organized into **three stages of progression**:
-
----
 
 ## 📌 Project Roadmap
 
