@@ -17,7 +17,7 @@ A faithful reimplementation of Karpathy’s *micrograd*:
 * Basic forward & backward propagation
 * Elementary scalar operations
 
-👉 Goal: understand **how automatic differentiation works** from scratch.
+Goal: understand **how automatic differentiation works** from scratch.
 
 ---
 
@@ -29,7 +29,7 @@ My own extension of *micrograd* with improvements:
 * Additional activation functions (ReLU, Sigmoid, Tanh, etc.)
 * Better visualization of computational graphs
 
-👉 Goal: expand *micrograd* into something closer to a **mini deep 
+Goal: expand *micrograd* into something closer to a **mini deep 
 learning library**.
 
 ---
@@ -43,7 +43,7 @@ The advanced version of the project:
 * Example projects (e.g. classification tasks)
 * Clear math explanations alongside the code
 
-👉 Goal: build a **lightweight deep learning framework** that bridges the 
+Goal: build a **lightweight deep learning framework** that bridges the 
 gap between educational code and real-world PyTorch/TensorFlow.
 
 ---
