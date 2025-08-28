@@ -9,7 +9,7 @@ Inspired by Karpathy’s *micrograd*, but expanded into a full journey: **microg
 
 This repository is structured as a staged learning + engineering journey. Each stage builds on the previous one, gradually transforming a toy autograd engine into a portfolio-grade deep learning framework.
 
-### 1. micrograd (done)
+### 1. Micrograd (done)
 
 * Similar reproduction of Karpathy’s Micrograd.
 * Implements a scalar-based autograd engine with:
@@ -19,7 +19,7 @@ This repository is structured as a staged learning + engineering journey. Each s
   * Computation graph visualization (Graphviz)
   * Minimal `Neuron`, `Layer`, `MLP`
 
-### 2. micrograd++ (next)
+### 2. Micrograd++ (next)
 
 **Goal:** Harden the scalar engine & add missing features.
 
@@ -30,7 +30,7 @@ This repository is structured as a staged learning + engineering journey. Each s
 * Utility: `zero_grad()`
 * Unit tests with `pytest`
 
-### 3. microgradx
+### 3. MicrogradX
 
 **Goal:** Vectorize with NumPy & enable batching.
 
@@ -40,7 +40,7 @@ This repository is structured as a staged learning + engineering journey. Each s
 * Optimizers: SGD, Adam
 * Benchmarks: ≥5× faster than scalar micrograd++
 
-### 4. vhgrad (final stage)
+### 4. VHGrad
 
 **Goal:** Polish into a professional-grade mini-framework.
 
