@@ -109,7 +109,8 @@ for epoch in range(1000):
 
 ## License
 
-MIT — free to use, learn from, and extend.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) — free to use, learn from, and extend.
+
 
 ---
 
