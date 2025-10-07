@@ -116,5 +116,5 @@ for epoch in range(1000):
 
 ## Credits
 
-* Original inspiration: \[Andrej Karpathy’s micrograd]
+* Original inspiration: [Andrej Karpathy’s micrograd](https://github.com/karpathy/micrograd)
 * Built by [Virvi Huta](https://github.com/virvihuta)
