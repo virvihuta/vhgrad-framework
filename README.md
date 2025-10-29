@@ -1,7 +1,7 @@
 # VHGrad
 
 **An educational light deep learning framework built step by step from scratch.**
-Inspired by Karpathy’s *micrograd*, but expanded into a full journey: **micrograd → micrograd++ → microgradx → vhgrad**.
+Inspired by Karpathy’s *micrograd*, but expanded into a full journey.
 
 ---
 
@@ -11,36 +11,15 @@ This repository is structured as a staged learning + engineering journey. Each s
 
 ### 1. Micrograd (done)
 
-* Similar reproduction of Karpathy’s Micrograd.
+* Similar reproduction of Karpathy’s Micrograd with some other differences.
 * Implements a scalar-based autograd engine with:
 
   * `Value` class (forward/backward)
-  * Core ops: `+`, `*`, `tanh`
+  * Core ops: `+`, `-`, `*`, `/`, `^`, `tanh`
   * Computation graph visualization (Graphviz)
   * Minimal `Neuron`, `Layer`, `MLP`
 
-### 2. Micrograd++ (next)
-
-**Goal:** Harden the scalar engine & add missing features.
-
-* Add full op coverage: `sub`, `neg`, `pow`, `/`, `exp`, `log`, `relu`
-* Add losses: MSE, Binary Cross Entropy
-* Gradient checker (finite differences)
-* Optimizers: SGD + momentum
-* Utility: `zero_grad()`
-* Unit tests with `pytest`
-
-### 3. MicrogradX
-
-**Goal:** Vectorize with NumPy & enable batching.
-
-* `TensorValue`: extend autograd to ndarrays
-* Vectorized `Neuron`, `Layer`, `MLP` (matrix multiplies)
-* Mini-batching + dataloader
-* Optimizers: SGD, Adam
-* Benchmarks: ≥5× faster than scalar micrograd++
-
-### 4. VHGrad
+### 4. VHgrad (not released)
 
 **Goal:** Polish into a professional-grade mini-framework.
 
@@ -50,7 +29,7 @@ This repository is structured as a staged learning + engineering journey. Each s
   * `Linear`, `Dropout`, activations (ReLU, Tanh, LeakyReLU)
 * Training utilities:
 
-  * SGD, Adam, AdamW optimizers
+  * SGD, Adam optimizers
   * LR schedulers (step, cosine)
   * Gradient clipping, early stopping
 * Reliability:
@@ -90,10 +69,10 @@ for epoch in range(1000):
 
 ## Benchmarks (targets)
 
-* XOR: ≥95% acc within 5k steps (micrograd++)
-* Spiral: ≥90% acc (microgradx)
-* MNIST (1k subset): ≥90% acc ≤10 epochs (microgradx)
-* MNIST (10k subset): ≥95% acc ≤20 epochs (vhgrad)
+* XOR: ≥95% acc within 5k steps
+* Spiral: ≥90% acc
+* MNIST (1k subset): ≥90% acc ≤10 epochs
+* MNIST (10k subset): ≥95% acc ≤20 epochs
 * Speedup: ≥5× vs scalar baseline
 
 ---
@@ -101,8 +80,6 @@ for epoch in range(1000):
 ## Definition of Done per stage
 
 * **micrograd:** scalar engine reproduces tutorial 
-* **micrograd++:** ops, losses, grad-checker, XOR demo working
-* **microgradx:** tensor engine, batching, spiral & MNIST demos
 * **vhgrad:** polished framework, docs, PyPI, ≥95% MNIST acc, CI tests
 
 ---
