@@ -1,4 +1,4 @@
-# VHGrad
+# VHgrad
 
 **An educational light deep learning framework built step by step from scratch.**
 Inspired by Karpathy’s *micrograd*, but expanded into a full journey.
