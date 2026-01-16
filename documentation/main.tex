@@ -1,0 +1,136 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[a4paper,margin=3cm]{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+\setstretch{1.25}
+
+\titleformat{\chapter}
+  {\normalfont\LARGE\bfseries}
+  {}{0pt}{}
+
+\titlespacing*{\chapter}{0pt}{0pt}{1.2cm}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+
+    {\Large
+    Höhere Technische Lehranstalt Shkoder\\
+    Abteilung Systemtechnik -- Schwerpunkt Data Science
+    \par}
+
+    \vspace{0.8cm}
+
+    {\large
+    Schuljahr 2025/26
+    \par}
+
+    \vspace{3cm}
+
+    {\Huge\bfseries
+    VHGRAD
+    \par}
+
+    \vspace{0.8cm}
+
+    {\Large
+    Entwicklung eines didaktischen Deep-Learning-Frameworks\\
+    mit eigener Autograd-Engine
+    \par}
+
+    \vspace{2cm}
+
+    {\Large
+    Diplomarbeit
+    \par}
+
+    \vspace{2.5cm}
+
+    {\large
+    Verfasst von\\[0.3em]
+    \textbf{Virvi Huta}
+    \par}
+
+    \vspace{1.5cm}
+
+    {\large
+    Betreuer\\[0.3em]
+    Mag.\ Max Mustermann
+    \par}
+
+    \vfill
+
+    {\large
+    Shkoder, März 2026
+    \par}
+\end{titlepage}
+
+\clearpage
+
+\chapter*{\mbox{Technical Progression of the vhgrad Framework}}
+\addcontentsline{toc}{chapter}{Technical Progression of the vhgrad Framework}
+
+\begingroup
+\small
+
+\begin{enumerate}[
+    leftmargin=0pt,
+    itemindent=1.5em,
+    label=\textbf{\arabic*.},
+    itemsep=0.35em,
+    topsep=0.3em,
+    parsep=0pt
+]
+
+\item \textbf{Foundations of Neural Networks}  
+Introduction to neural network concepts, historical context, and core components such as neurons, layers, and parameters.
+
+\item \textbf{Initial Implementations}  
+Manual implementation of single neurons and multi-neuron layers with emphasis on mathematical foundations.
+
+\item \textbf{Vectorized Computation}  
+Transition to NumPy-based implementations using vectors, matrices, batching, and efficient matrix operations.
+
+\item \textbf{Multi-Layer Network Construction}  
+Encapsulation of dense layers into reusable classes and structured handling of training data.
+
+\item \textbf{Activation Functions}  
+Implementation of linear and non-linear activation functions, including Sigmoid, ReLU, and Softmax.
+
+\item \textbf{Loss Functions and Evaluation}  
+Integration of categorical cross-entropy loss and accuracy metrics for model evaluation.
+
+\item \textbf{Optimization and Backpropagation}  
+Gradient-based optimization, derivatives, chain rule, and full backpropagation pipeline.
+
+\item \textbf{Optimizers}  
+Implementation of SGD, learning rate decay, momentum, AdaGrad, RMSProp, and Adam.
+
+\item \textbf{Regularization Techniques}  
+L1 and L2 regularization, dropout, and validation strategies to improve generalization.
+
+\item \textbf{Classification and Regression}  
+Support for binary classification and regression tasks with appropriate loss functions.
+
+\item \textbf{Model Abstraction}  
+Introduction of a unified model object encapsulating layers, losses, and optimizers.
+
+\item \textbf{Real-World Data Integration}  
+Data loading, preprocessing, shuffling, batching, and training on real datasets.
+
+\item \textbf{Model Persistence and Inference}  
+Saving and loading model parameters and enabling prediction on unseen data.
+
+\end{enumerate}
+
+\endgroup
+
+\end{document}
