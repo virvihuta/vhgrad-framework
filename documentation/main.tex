@@ -32,8 +32,7 @@
     \vspace{0.8cm}
 
     {\Large
-    Development of a Didactic Deep Learning Framework\\
-    with a Custom Autograd Engine
+    Development of a Didactic Deep Learning Framework from Scratch
     \par}
 
     \vspace{3cm}
@@ -61,62 +60,49 @@
     leftmargin=0pt,
     itemindent=1.5em,
     label=\textbf{\arabic*.},
-    itemsep=0.35em,
+    itemsep=0.75em,
     topsep=0.3em,
     parsep=0pt
 ]
 
-\item \textbf{Foundations of Neural Networks}\\
-Introduction to neural network concepts, and core
-components such as neurons, layers and parameters.
+\item \textbf{Foundations of Neural Computation}\\
+Historical context and fundamental concepts underlying modern neural networks.
 
-\item \textbf{Initial Implementations}\\
-Manual implementation of single neurons and multi-neuron layers with
-emphasis on mathematical foundations.
+\item \textbf{Building the First Components}\\
+Single neurons, multi-neuron layers, tensors and matrix operations with NumPy.
 
-\item \textbf{Vectorized Computation}\\
-Transition to NumPy-based implementations using vectors, matrices,
-batching, and efficient matrix operations.
+\item \textbf{Structured Layer Design}\\
+Encapsulation of dense layers into reusable classes with organized data handling.
 
-\item \textbf{Multi-Layer Network Construction}\\
-Encapsulation of dense layers into reusable classes and structured
-handling of training data.
+\item \textbf{Non-Linearity through Activation}\\
+Step, linear, sigmoid, ReLU and Softmax activation functions and their roles.
 
-\item \textbf{Activation Functions}\\
-Implementation of linear and non-linear activation functions,
-including Sigmoid, ReLU, and Softmax.
+\item \textbf{Measuring Network Error}\\
+Cross-entropy loss formulation and accuracy metrics for classification.
 
-\item \textbf{Loss Functions and Evaluation}\\
-Integration of categorical cross-entropy loss and accuracy metrics
-for model evaluation.
+\item \textbf{Parameter Optimization}\\
+First principles of gradient-based learning and iterative parameter updates.
 
-\item \textbf{Optimization and Backpropagation}\\
-Gradient-based optimization, derivatives, chain rule, and full
-backpropagation pipeline.
+\item \textbf{Calculus of Learning}\\
+Numerical and analytical derivatives, partial derivatives and the chain rule.
 
-\item \textbf{Optimizers}\\
-Implementation of SGD, learning rate decay, momentum, AdaGrad,
-RMSProp, and Adam.
+\item \textbf{Gradient Flow through the Network}\\
+Full backward pass with analytically derived gradients across layers and losses.
 
-\item \textbf{Regularization Techniques}\\
-L1 and L2 regularization, dropout, and validation strategies to
-improve generalization.
+\item \textbf{Advanced Optimization Methods}\\
+SGD, learning rate scheduling, momentum and adaptive optimizers including Adam.
 
-\item \textbf{Classification and Regression}\\
-Support for binary classification and regression tasks with
-appropriate loss functions.
+\item \textbf{Controlling Generalization}\\
+Weight regularization, dropout and validation strategies to reduce overfitting.
 
-\item \textbf{Model Abstraction}\\
-Introduction of a unified model object encapsulating layers,
-losses, and optimizers.
+\item \textbf{Extending to Other Task Types}\\
+Binary classification and regression with appropriate outputs and loss functions.
 
-\item \textbf{Real-World Data Integration}\\
-Data loading, preprocessing, shuffling, batching, and training
-on real datasets.
+\item \textbf{Training on Real Data}\\
+End-to-end pipeline covering loading, preprocessing, batching and model training.
 
-\item \textbf{Model Persistence and Inference}\\
-Saving and loading model parameters and enabling prediction
-on unseen data.
+\item \textbf{Deployment and Reuse}\\
+Parameter serialization, model loading and inference on unseen data.
 
 \end{enumerate}
 
