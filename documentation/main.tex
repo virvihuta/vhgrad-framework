@@ -9,49 +9,81 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
 
+% Line spacing
 \setstretch{1.25}
 
-\titleformat{\chapter}
+% Chapter format — numbered, large, bold, no "Chapter X" prefix
+\titleformat{\chapter}[block]
   {\normalfont\LARGE\bfseries}
-  {}{0pt}{}
+  {\thechapter.}{0.5em}{}
 
 \titlespacing*{\chapter}{0pt}{0pt}{1.2cm}
 
+% Section format
+\titleformat{\section}
+  {\normalfont\large\bfseries}
+  {\thesection}{0.5em}{}
+
+% Code listing style
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black!20},
+  backgroundcolor=\color{black!3},
+  tabsize=4
+}
+
+% Hyperlink styling
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue
+}
+
 \begin{document}
 
+% ─── Title Page ───────────────────────────────────────────────────────────────
 \begin{titlepage}
     \centering
 
     \vspace*{3cm}
 
-    {\Huge\bfseries
-    VHGRAD
-    \par}
+    {\Huge\bfseries VHGRAD \par}
 
     \vspace{0.8cm}
 
-    {\Large
-    Development of a Didactic Deep Learning Framework from Scratch
-    \par}
+    {\Large Development of a Didactic Deep Learning Framework from Scratch \par}
 
     \vspace{3cm}
 
-    {\large
-    \textbf{Virvi Huta}
-    \par}
+    {\large \textbf{Virvi Huta} \par}
 
     \vfill
 
-    {\large
-    2026
-    \par}
+    {\large 2026 \par}
 \end{titlepage}
 
 \clearpage
 
-\chapter*{\mbox{Technical Progression of the VHgrad Framework}}
-\addcontentsline{toc}{chapter}{Technical Progression of the VHgrad Framework}
+% ─── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\clearpage
+
+% ─── Technical Progression ────────────────────────────────────────────────────
+\chapter*{Technical Progression}
+\addcontentsline{toc}{chapter}{Technical Progression}
 
 \begingroup
 \small
@@ -107,5 +139,189 @@ Parameter serialization, model loading and inference on unseen data.
 \end{enumerate}
 
 \endgroup
+
+\clearpage
+
+\chapter{Foundations of Neural Computation}
+
+\section{The Single Neuron}
+
+A neuron is the fundamental computational unit of a neural network. It takes a set of inputs,
+multiplies each by a corresponding weight, sums the results and adds a scalar offset called a bias.
+Given inputs $x_1, x_2, \ldots, x_n$, weights $w_1, w_2, \ldots, w_n$ and bias $b$,
+the output of a single neuron is:
+
+\begin{equation}
+    z = \sum_{i=1}^{n} x_i w_i + b
+\end{equation}
+
+The weights control how strongly each input influences the output. A large positive weight
+amplifies the corresponding input, a negative weight inverts it and a weight near zero makes
+that input nearly irrelevant. The bias shifts the output independently of the inputs.
+
+The first implementation computed this explicitly for four inputs with no abstraction:
+
+\begin{lstlisting}[language=Python]
+inputs  = [1, 2, 3, 2.5]
+weights = [0.2, 0.8, -0.5, 1.0]
+bias    = 2
+
+output = (inputs[0] * weights[0] +
+          inputs[1] * weights[1] +
+          inputs[2] * weights[2] +
+          inputs[3] * weights[3] +
+          bias)
+# output: 4.8
+\end{lstlisting}
+
+Substituting the values directly:
+$1 \times 0.2 + 2 \times 0.8 + 3 \times (-0.5) + 2.5 \times 1.0 + 2 = 4.8$
+
+Writing every multiplication by hand was intentional — the goal was to see the raw mechanics
+before introducing any abstraction.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{A Layer of Neurons}
+
+A layer is a collection of neurons that all receive the same input vector but each apply
+their own weights and bias. For a layer of $m$ neurons with shared input
+$\mathbf{x} \in \mathbb{R}^n$, the output of neuron $j$ is:
+
+\begin{equation}
+    z_j = \sum_{i=1}^{n} x_i w_{ji} + b_j, \quad j = 1, \ldots, m
+\end{equation}
+
+The implementation first wrote all three outputs explicitly — every multiplication typed out —
+to make the repetitive structure visible. Then it was refactored into a loop:
+
+\begin{lstlisting}[language=Python]
+inputs  = [1, 2, 3, 2.5]
+weights = [[0.2, 0.8, -0.5, 1.0],
+           [0.5, -0.91, 0.26, -0.5],
+           [-0.26, -0.27, 0.17, 0.87]]
+biases  = [2, 3, 0.5]
+
+layer_outputs = []
+for neuron_weights, neuron_bias in zip(weights, biases):
+    neuron_output = 0
+    for n_input, weight in zip(inputs, neuron_weights):
+        neuron_output += n_input * weight
+    neuron_output += neuron_bias
+    layer_outputs.append(neuron_output)
+
+# layer_outputs: [4.8, 1.21, 2.385]
+\end{lstlisting}
+
+The loop makes clear that a layer is nothing more than the same neuron computation
+repeated across rows of the weight matrix. The structure — same inputs, different weights
+per neuron — is the core of what a dense layer is.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{The Dot Product}
+
+Before moving to NumPy it was important to recognise that a neuron's weighted sum is
+mathematically a dot product. Given two vectors $\mathbf{a}, \mathbf{b} \in \mathbb{R}^n$,
+their dot product is:
+
+\begin{equation}
+    \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i
+\end{equation}
+
+This was verified manually and then with a loop for $\mathbf{a} = [1, 2, 3]$
+and $\mathbf{b} = [2, 3, 4]$:
+
+\begin{equation}
+    1 \times 2 + 2 \times 3 + 3 \times 4 = 20
+\end{equation}
+
+Recognising this equivalence is what makes the transition to NumPy clean —
+a neuron's computation is exactly one call to a dot product function.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Vectorized Computation with NumPy}
+
+Writing loops in Python is slow. NumPy replaces them with highly optimised C routines
+that operate on entire arrays at once. The single neuron collapses to one line:
+
+\begin{lstlisting}[language=Python]
+outputs = np.dot(inputs, weights) + bias
+# outputs: 4.8
+\end{lstlisting}
+
+For the full layer the weight matrix is passed first so NumPy computes one dot product
+per row — one output per neuron:
+
+\begin{lstlisting}[language=Python]
+outputs = np.dot(weights, inputs) + biases
+# outputs: [4.8, 1.21, 2.385]
+\end{lstlisting}
+
+The argument order matters. \texttt{np.dot(weights, inputs)} treats each row of the
+weight matrix as one neuron's weight vector and computes its dot product with the input
+vector, producing one scalar per neuron.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Matrices and Shape Alignment}
+
+A plain Python list passed to NumPy produces a 1D array — a vector with no orientation.
+Wrapping it in an extra list creates a 2D row vector of shape $(1, n)$, and transposing
+it with \texttt{.T} produces a column vector of shape $(n, 1)$. This was verified
+with a matrix dot product:
+
+\begin{lstlisting}[language=Python]
+a = np.array([[1, 2, 3]])     # shape (1, 3)
+b = np.array([[2, 3, 4]]).T   # shape (3, 1)
+np.dot(a, b)                  # [[20]], shape (1, 1)
+\end{lstlisting}
+
+The result is a $(1, 1)$ matrix rather than a scalar because matrix multiplication
+was performed rather than a vector dot product. Understanding how shapes interact
+under multiplication is essential for everything that follows.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Batched Forward Pass}
+
+Processing one sample at a time is inefficient. In practice a neural network processes
+a batch of samples simultaneously. If the input matrix $X$ has shape
+$(N, n)$ — $N$ samples each with $n$ features — and the weight matrix $W$ has shape
+$(m, n)$ — $m$ neurons each with $n$ weights — then the full layer output is:
+
+\begin{equation}
+    Z = X W^T + \mathbf{b}
+\end{equation}
+
+where $\mathbf{b} \in \mathbb{R}^m$ is the bias vector broadcast across all samples,
+and $Z$ has shape $(N, m)$ — one output per neuron per sample.
+
+The transpose $W^T$ flips $W$ from $(m, n)$ to $(n, m)$ so that the matrix product
+$X W^T$ of shapes $(N, n) \cdot (n, m)$ is defined and yields $(N, m)$.
+
+\begin{lstlisting}[language=Python]
+inputs  = [[1.0, 2.0, 3.0, 2.5],
+           [2.0, 5.0, -1.0, 2.0],
+           [-1.5, 2.7, 3.3, -0.8]]
+
+weights = [[0.2, 0.8, -0.5, 1.0],
+           [0.5, -0.91, 0.26, -0.5],
+           [-0.26, -0.27, 0.17, 0.87]]
+
+biases = [2.0, 3.0, 0.5]
+
+layer_outputs = np.dot(inputs, np.array(weights).T) + biases
+\end{lstlisting}
+
+The result is a $(3, 3)$ matrix — three samples, three neuron outputs each:
+
+\begin{equation}
+    Z = \begin{pmatrix}
+        4.800 & 1.210 & 2.385 \\
+        8.900 & -1.810 & 0.200 \\
+        1.410 & 1.051 & 0.026
+    \end{pmatrix}
+\end{equation}
+
+Each row corresponds to one input sample and each column to one neuron.
+This is a complete batched forward pass through a single dense layer —
+the foundation on which every subsequent component of VHgrad is built.
 
 \end{document}
