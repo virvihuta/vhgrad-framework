@@ -11,7 +11,7 @@ This repository is structured as a staged learning + engineering journey. Each s
 
 ### 1. Micrograd (done)
 
-* Similar reproduction of Karpathy’s Micrograd with some other differences.
+* Similar reproduction of Karpathy’s Micrograd with some small differences.
 * Implements a scalar-based autograd engine with:
 
   * `Value` class (forward/backward)
